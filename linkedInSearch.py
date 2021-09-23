@@ -1,6 +1,9 @@
 from bs4 import BeautifulSoup, re
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.chrome.options import Options
 import requests
 import time
 import random
@@ -12,10 +15,22 @@ import ast
 options = webdriver.ChromeOptions() 
 options.add_argument(r"user-data-dir=C:\Users\sport\AppData\Local\Google\Chrome\User Data")
 
-# specify browser and load up page
-browser = webdriver.Chrome(r"C:\Projects\selenium\selenium drivers\chromedriver", options=options)
+# specify settings to reduce bot suspicion
+options.add_argument("--start-maximized")
+options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
 
-# Define variables for url/searching
+# add working user-agent
+userAgent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"
+options.add_argument("user-agent="+userAgent)
+
+# specify the location of chromedriver
+browser = webdriver.Chrome(r"C:\Projects\Python\LinkedInSearch\selenium\selenium drivers\chromedriver", options=options)
+
+# remove navigator webdriver flag to reduce bot detection
+browser.execute_script("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+
+# Define companies for url/searching
+# Make sure to get the correct company name from the company's LinkedIn URL
 companies = [
     'advanced-home-care', 'Aerotek', 'Amazon', 'American-Express', 'att', 'Bank-of-America', 
     'BASF', 'BB&T', 'Belk', 'Center-for-Creative-Leadership', 'Charter-Communications', 'Cisco', 
@@ -37,63 +52,9 @@ companies = [
     'department-of-veterans-affairs', 'usps', 'volvo-group', 'wake-forest-baptist-health-edu', 'xpologistics'
 ]
 
-# companies = ['advanced-home-care', 'Aerotek']
+# Specify the school by getting the school code from LinkedIn URL (facetSchool in URL)
 school = "18798"
 employeeTotals ={}
-
-######
-# Search by DEGREE
-
-# degrees = [
-#     "Business Administration and Management, General", "Accounting",
-#     "Information Technology", "Computer Science","Finance, General",
-#     "Marketing", "Economics", "Operations Management and Supervision",
-#     "Business/Commerce, General", "Business, Management, Marketing, and Related Support Services",
-#     "School of Business, Economics and Law at the University of Gothenburg",
-#     "Accounting and Finance", "Organizational Leadership"
-# ]
-
-# def findDegrees():
-#     # Find all listed degrees
-#     html = browser.page_source
-#     soup = BeautifulSoup(html, "lxml")
-#     pageDescription = soup.title.text
-#     print("TITLE: " + pageDescription)
-    
-#     # Select the div that contains list of fields of study
-#     degreesPresent = soup.find_all("div", {"class": "artdeco-card p4 m2 org-people-bar-graph-module__field-of-study"})
-   
-#     # Convert html to string
-#     for i in range(0, len(degreesPresent)):
-#         degreesPresent[i] = degreesPresent[i].text
-        
-#     # Convert array to string
-#     degreesPresentString = ""
-#     for i in degreesPresent: 
-#         degreesPresentString += i  
-    
-#     # Remove unnecessary instances and convert to array
-#     degreesPresentArray = degreesPresentString.split('\n')
-
-#     # Remove any irrelevant values in array
-#     unwanted = {'', '          What they studied', '    Add', ' ', '        '}
-#     degreesList = [e for e in degreesPresentArray if e not in unwanted]
-
-#     # Extract numbers and convert to int array
-#     numberOfDegrees = list(next(zip(*map(str.split, degreesList))))
-#     for i in range(0, len(numberOfDegrees)): 
-#         numberOfDegrees[i] = int(numberOfDegrees[i]) 
-    
-#     sumDegrees = sum(numberOfDegrees)
-
-#     print (degreesList)
-#     print(numberOfDegrees)
-#     print(sumDegrees)
-#     print(len(degreesList))
-#     print(type(degreesList))
-
-
-########
 
 # Set Delay
 def delay ():
@@ -103,14 +64,6 @@ def delay ():
 def findEmployees(company,soup):
     total = soup.find("span", {"class": "t-20"})
     employeeTotals[company] = total.text.replace("employees","").strip()
-
-# Export results to CSV
-def exportCSV():
-    with open('UNCG Employees (LinkedIn).csv', 'w', newline='') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(["Company", "Number of Employees"])
-        for key, value in employeeTotals.items():
-            writer.writerow([key, value])
 
 # Loop urls
 def iterateCompanies():
@@ -125,11 +78,16 @@ def iterateCompanies():
         delay()
         browser.close()
         browser.switch_to.window(browser.window_handles[0])
-        # browser.find_element_by_xpath("//button[@aria-label='Next']")\
-        #     .click()
-        # findDegrees()
-        
-# Initiate LinkedIn search
+
+# Export results to CSV
+def exportCSV():
+    with open('School Employees.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["Company", "Number of Employees"])
+        for key, value in employeeTotals.items():
+            writer.writerow([key, value])
+
+# Initiate LinkedIn search and print results to console
 iterateCompanies()
 print(employeeTotals)
 
@@ -138,8 +96,3 @@ exportCSV()
 browser.quit()
 
 print("Search Complete..")
-
-### NOTES
-
-# Wendover Funding Inc. not on LinkedIn - no data for this company
-# Create aggregates for joint companies like Truist+BB&T

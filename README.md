@@ -15,12 +15,13 @@
 - 106 popular companies are already listed as an example
 
 ## How to change school
-- To get desired school code for the URL complete the following steps:
-    1. Go to https://www.linkedin.com/company/att/people/ and search `Massachusetts Institute of Technology` 
-    2. Click on `Massachusetts Institute of Technology` in the `Where they studied` section
-    3. You should see the URL update. Get the five-digit code from the part of the URL that says `facetSchool`
-    4. Replace five-digit code in the `school` variable
+- To get desired school code for the URL complete the following steps (E.g.):
+    1. Go to https://www.linkedin.com/company/att/people/ and search "Massachusetts Institute of Technology" 
+    2. Click on "Massachusetts Institute of Technology" in the "Where they studied" section
+    3. You should see the URL update. Get the five-digit code from the part of the URL that says "facetSchool"
+    4. Replace five-digit code in the `school` variable in `LinkedInSearch.py`
 
 ## Other Notes
 - Run by typing `python LinkedInSearch.py` in terminal
-- Program will launch chrome tabs repeatedly and do quick searches to scrape data. Don't interfere when program is running. Program takes about 4-5 seconds per company search on average computer speed
+- Program will launch chrome tabs repeatedly and do quick searches to scrape data. Don't interfere when program is running. 
+- Program takes about 4-5 seconds per company search on average computer speed

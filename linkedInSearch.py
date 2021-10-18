@@ -52,7 +52,7 @@ companies = [
     'department-of-veterans-affairs', 'usps', 'volvo-group', 'wake-forest-baptist-health-edu', 'xpologistics'
 ]
 
-# Specify the school by getting the school code from LinkedIn URL (facetSchool in URL)
+# Specify school by getting the school code from LinkedIn URL (facetSchool in URL)
 school = "18798"
 employeeTotals ={}
 

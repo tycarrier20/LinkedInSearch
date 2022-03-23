@@ -7,8 +7,13 @@
 - Many measures are taken in the code to prevent account getting locked out/restricted, but there is always a chance of the bot being recognized
 
 ## Dependencies
-- Must have BeautifulSoup installed: https://www.geeksforgeeks.org/beautifulsoup-installation-python/
-- Must have Selenium installed: https://www.geeksforgeeks.org/how-to-install-selenium-in-python/
+- Node.js: https://nodejs.org/en/download/
+- Python: https://www.python.org/downloads/
+- BeautifulSoup: https://www.geeksforgeeks.org/beautifulsoup-installation-python/
+- Selenium: https://www.geeksforgeeks.org/how-to-install-selenium-in-python/
+- Google Chrome: https://www.google.com/chrome/
+- Chrome Driver: https://chromedriver.chromium.org/downloads
+- Code Editor: https://code.visualstudio.com/Download (ex.)
 
 ## How to change companies
 - Feel free to change the companies you want to search for in the `companies` object. Just make sure the company names is the correct company name from the LinkedIn URL

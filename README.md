@@ -2,8 +2,8 @@
 
 ## IMPORTANT: 
 - DO NOT USE PERSONAL LINKEDIN ACCOUNT WHEN RUNNING THIS PROGRAM
-- Before running program, make sure you have a fake LinkedIn account created and have logged into it in your chrome browser
-- You will need to use a fake account in case the account gets locked out/restricted since LinkedIn doesn't like web scrapers ;)
+- Before running program, make sure you have a non-primary LinkedIn account created and have logged into it in your chrome browser
+- You will need to use a non-primary account in case the account gets locked out/restricted since LinkedIn doesn't like web scrapers ;)
 - Many measures are taken in the code to prevent account getting locked out/restricted, but there is always a chance of the bot being recognized
 
 ## Dependencies

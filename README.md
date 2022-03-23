@@ -16,7 +16,7 @@
 - Code Editor: https://code.visualstudio.com/Download (ex.)
 
 ## How to change companies
-- Feel free to change the companies you want to search for in the `companies` object. Just make sure the company names is the correct company name from the LinkedIn URL
+- Feel free to change the companies you want to search for in the `companies` object. Just make sure the company names is the correct company name from the LinkedIn URL (ex.  `lowe's-home-improvement` from the https://www.linkedin.com/company/lowe's-home-improvement/ url
 - 106 popular companies are already listed as an example
 
 ## How to change school

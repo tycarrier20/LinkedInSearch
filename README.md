@@ -28,5 +28,6 @@
 
 ## Other Notes
 - Run by typing `python LinkedInSearch.py` in terminal
-- Program will launch chrome tabs repeatedly and do quick searches to scrape the data. Don't interfere when program is running. 
+- Program will launch chrome tabs repeatedly and do quick searches to scrape the data. Don't interfere when program is running 
 - Program takes about 4-5 seconds per company search on average computer speed
+- When the program finishes running, there will be an outputted excel sheet in your project's directory including the results
